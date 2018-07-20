@@ -303,12 +303,17 @@ let getUserInfoByUserIdAndSendMail = (detail) => {
                 console.log('user does not exists');
             } else {
                 let mailData = {
-                    
                     subject: detail.subject,
                     message: detail.message,
                     receiverEmail: result.emailId
                 }
-                nodemailer.sendMeetingInfo(mailData);
+                nodemailer.sendMeetingInfo(mailData,(err,result)=>{
+                    if(err){
+                        console.log("Send Meeting Info  Error Occured "+err);
+                    }else{
+                        console.log("Send Meeting Info Message Sent");
+                    }
+                });
             }
         }
     });
